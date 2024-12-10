@@ -39,7 +39,7 @@ int main() {
                 while (getchar() != '\n');
             }
         } else {
-            printf("Please enter leatters! ");
+            printf("Please enter numbers! ");
             while(getchar() != '\n');
         }
     }
