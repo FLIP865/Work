@@ -22,7 +22,7 @@ struct AccountDataBase {
     virtual void set_balance(long id, double ammount) = 0;
 };
 
-struct InMemoryAccountDatabase : AccountDataBase {
+struct InMemoryAccountDatabase : AccountDatabase {
     double get_balanced(long id) const override {
         auto it = accounts.find(id);
         if (it != accounts.end()) return it->second;
