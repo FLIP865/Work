@@ -47,7 +47,7 @@ int main() {
     if (isPrime(i)) {
         printf("Number (%d) is prime:\n", i);
     } else {
-        printf("Number (%d) is nor prime:\n", i);
+        printf("Number (%d) is not prime:\n", i);
     }
     return 0;
 }
