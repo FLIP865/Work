@@ -184,7 +184,7 @@ void update_game_logic() {
     map[star_y][star_x] = '*';
 }
 
-void geme_loop() {
+void game_loop() {
     srand(time(NULL));
     init_game_state();
     init_map();
