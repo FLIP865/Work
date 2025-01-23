@@ -75,7 +75,7 @@ void remove_comments(FILE *input, FILE *output)
                 //fprintf(output, "%c%c", c, next);
             }
         } else {
-            // Обычный тескт
+            // Обычный текст
             //fputc(c, output);
             fprintf(output, "%s%c", colors[0], c);
             if (c == '"') {
