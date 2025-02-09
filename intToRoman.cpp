@@ -14,8 +14,8 @@ class Solution {
             std::vector<int> values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 
             for (size_t pos = 0; pos < values.size(); ++pos) {
-                int coutn = num / values[pos];
-                for (int i = 0; i < coutn; i++) {
+                int count = num / values[pos];
+                for (int i = 0; i < count; i++) {
                     roman += notations[pos];
                 }
                 num %= values[pos];
