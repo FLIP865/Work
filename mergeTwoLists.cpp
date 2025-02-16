@@ -65,5 +65,10 @@ int main() {
 
     print_List(result);
 
+    while (result) {
+        ListNode* temp = result;
+        result = result->next;
+        delete temp;
+    }
     return 0;
 }
