@@ -65,5 +65,11 @@ int main() {
     ListNode* result = solution.mergeKList(lists);
 
     print_mergeKList(result);
+
+    while (result) {
+        ListNode* temp = result;
+        result = result->next;
+        delete temp;
+    }
     return 0;
 }
