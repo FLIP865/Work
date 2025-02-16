@@ -52,6 +52,11 @@ int main() {
     ListNode* result = solution.removeNthFromEnd(head, n);
     
     print_listNode(result);
-    
+
+    while (result) {
+        ListNode* temp = result;
+        result = result->next;
+        delete temp;
+    }
     return 0;
 }
