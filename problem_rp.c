@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
+#include <fenv.h>
 
 typedef union {
     float f;
@@ -10,6 +11,8 @@ typedef union {
 
 int main()
 {
+    fesetround(FE_DOWNWARD);
+
     int numeration, demuniration;
     printf("Enter number: ");
     if (scanf("%d %d", &numeration, &demuniration) != 2) {
@@ -34,22 +37,21 @@ int main()
     }
 
     if (x == 0.0) {
-        printf("0x0 0x0 0x0 0x0!\n");
+        printf("0x0 0x0\n");
         return 0;
     }
 
-    float f = (float)x;
-
     float f_lower, f_uper;
-    if ((double)f == x) {
-        f_lower = f;
-        f_uper = f;
-    } else if ((double)f > x) {
-        f_lower = nextafterf(f, -INFINITY);
-        f_uper = f;
+    if ((float)x == x) {
+        f_lower = f_uper = (float)x;
     } else {
-        f_lower = f;
-        f_uper = nextafterf(f, INFINITY);
+        if (x > 0.0) {
+            f_lower = nextafterf((float)x, -INFINITY);
+            f_uper = nextafterf((float)x, INFINITY);
+        } else {
+            f_lower = nextafterf((float)x, INFINITY);
+            f_uper = nextafterf((float)x, -INFINITY);
+        }
     }
     FloatUnion val;
     val.f = f_lower;
@@ -60,6 +62,10 @@ int main()
     uint32_t exp_uper = (val.u >> 23) & 0xFF;
     uint32_t mantissa_uper = val.u & 0x7FFFFF;
 
-    printf("0x%x 0x%x 0x%x 0x%x\n", exp_lower, mantissa_lower, exp_uper, mantissa_uper);
+    if (f_lower == f_uper) {
+        printf("0x%x 0x%x\n", exp_lower, mantissa_lower);
+    } else {
+        printf("0x%x 0x%x 0x%x 0x%x\n", exp_lower, mantissa_lower, exp_uper, mantissa_uper);
+    }
     return 0;
 }
