@@ -4,12 +4,11 @@
 
 int main()
 {
-    char *sieve;
     unsigned i, j;
     size_t n = 2000000;
     unsigned long long sum = 0ULL;
 
-    sieve = calloc(n, sizeof *sieve);
+    char *sieve = (char *)malloc(n * sizeof(char *));
     for (i = 2; i < n; i++) {
         if (!sieve[i]) {
             sum += i;
