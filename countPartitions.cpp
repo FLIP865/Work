@@ -14,6 +14,6 @@ int countPartitions(int n) {
 
 int main() {
     int n = 50;
-    std::cout << "Количество вариантов розложений числа " << n << " на слагаемые: " <<  countPartitions(n) << std::endl;
+    std::cout << "The number of possible decompositions of the number " << n << " into terms: " <<  countPartitions(n) << std::endl;
     return 0;
 }
