@@ -1,34 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int knapsack(int n, int W, int *weights, int *values);
-void read_sack(int n, int *weights, int *values);
+int knapsack(int n, int W, int *weights);
+void read_sack(int n, int *weights);
 
 int main()
 {
     int n, W;
 
-    if (scanf("%d %d", &n, &W) != 2) {
+    if (scanf("%d %d", &W, &n) != 2) {
         fprintf(stderr, "Error: Failed to read n and W!\n");
         abort();
     }
 
     int *weights = (int *)malloc(n * sizeof(int));
-    int *values = (int *)malloc(n * sizeof(int));
-    if (weights == NULL || values == NULL) {
+    if (weights == NULL) {
         fprintf(stderr, "Error: Memory allocation failed!\n");
-        free(weights);
-        free(values);
         abort();
     }
 
-        read_sack(n, weights, values);
-        int max_value = knapsack(n, W, weights, values);
+        read_sack(n, weights);
+        int max_value = knapsack(n, W, weights);
         printf("Result = %d\n", max_value);
-
+    
         free(weights);
-        free(values);
-
         return 0;
 }
 
@@ -37,13 +32,6 @@ void read_sack(int n, int *weights, int *values)
     for (int i = 0; i < n; i++) {
         if (scanf("%d", &weights[i]) != 1) {
             fprintf(stderr, "Error: Failed to read weights!\n");
-            abort();
-        }
-    }
-
-    for (int i = 0; i < n; i++) {
-        if (scanf("%d", &values[i]) != 1) {
-            fprintf(stderr, "Error: Failed to read values!\n");
             abort();
         }
     }
@@ -65,7 +53,7 @@ int knapsack(int n, int W, int *weights, int *values)
     for (int i = 1; i <= n; i++) {
         for (int w = 0; w <= W; w++) {
             if (weights[i - 1] <= w) {
-                int take = dp[i - 1][w - weights[i - 1]] + values[i - 1];
+                int take = dp[i - 1][w - weights[i - 1]] + 1;
                 dp[i][w] = (take > dp[i - 1][w]) ? take : dp[i - 1][w];
             } else {
                 dp[i][w] = dp[i - 1][w];
