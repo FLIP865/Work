@@ -10,16 +10,13 @@ int compare(const void *x, const void *y);
 int main()
 {
     FILE *fp = fopen("names.txt", "r");
+    char path[] = "names.txt";
     if (!fp) {
-        perror("Error opening file");
+        perror(path);
         return 1;
     }
 
     char **names = malloc(INITIAL_CAPACITY * sizeof(char *));
-    if (!names) {
-        perror("Memory allocation failed for names");
-        return 1;
-    }
 
     int count = 0;
     int capacity = INITIAL_CAPACITY;
