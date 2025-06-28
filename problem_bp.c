@@ -27,7 +27,7 @@ int main()
         return 0;
 }
 
-void read_sack(int n, int *weights, int *values)
+void read_sack(int n, int *weights)
 {
     for (int i = 0; i < n; i++) {
         if (scanf("%d", &weights[i]) != 1) {
@@ -37,7 +37,7 @@ void read_sack(int n, int *weights, int *values)
     }
 }
 
-int knapsack(int n, int W, int *weights, int *values)
+int knapsack(int n, int W, int *weights)
 {
     int **dp = (int **)malloc((n + 1) * sizeof(int *));
     for (int i = 0; i <= n; i++) {
