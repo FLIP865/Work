@@ -42,7 +42,6 @@ int main() {
                 fflush(stdout);
             }
         } else {
-        if (scanf("%d", &i) != 1) {
             printf("Please enter only a number!\n");
             while (getchar() != '\n' && getchar() != EOF);
             printf("Enter number: ");
