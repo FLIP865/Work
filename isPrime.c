@@ -1,23 +1,14 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
-
-// Переоброзование строки в число
-bool isNumber(const char *str) {
-    if (str == NULL || *str == '\0') {
-        return false;
-    }
-    char *expr;
-    strtod(str, &expr);
-    return *expr == '\0' && str != expr;
-}
 
 bool isPrime(int x)
 {
-    for (int i = 2; i*i <= x; i++)
+    if (x <= 1) {
+        return false;
+    }
+    for (int i = 2; i * i <= x; i++)
     {
-        if (x % i == 0) {
+        if ((x % i) == 0) {
             return false;
         }
     }
@@ -25,25 +16,30 @@ bool isPrime(int x)
 }
 
 int main() {
-    int i = 0;
+    int i;
     printf("Enter number: ");
     while (1) {
-        char input[100];
-        scanf("%s", input);
-        if (isNumber(input)) {
-            i = atof(input);
-            if (i > 1) {
-                break;
-            } else {
-                printf("Invalid input: ");
-                while (getchar() != '\n');
-            }
+        if (scnaf("%d", &i) != 1) {
+            printf("Please enter only a number!\n");
+            while (getchar() != '\n' && getchar() != EOF);
+            printf("Enter number: ");
+            continue;
+        }
+        int c = getchar();
+        if (c != '\n' && c != EOF) {
+            printf("Extra characters after the number are not allowed!\n");
+            while (c != '\n' && c != EOF) c = getchar();
+            printf("Enter number: ");
+            continue;
+        }
+        if (i > 1) {
+            break;
         } else {
-            printf("Please enter leatters! ");
-            while(getchar() != '\n');
+            printf("The number must be greater than 1!\n");
+            while (getchar() != '\n' && getchar() != EOF);
+            printf("Enter number: ");
         }
     }
-
     if (isPrime(i)) {
         printf("Number (%d) is prime:\n", i);
     } else {
