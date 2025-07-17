@@ -1,55 +1,54 @@
 #include <iostream>
 #include <limits>
-#include <string>
-#include <sstream>
 
 bool isPrime(int x)
 {
-    for (int i = 2; i * i < x; ++i)
-    {
-        if (x % i == 0) 
-        {
+    if (x <= 1) {
+        return false;
+    }
+    for (int i = 2; i * i < x; ++i) {
+        if (x % i == 0) {
             return false;
         }
     }
     return true;
 }
 
-bool isNumber(std::string& ss)
-{
-    std::stringstream iss(ss);
-    double num;
-    return (iss >> num) and iss.eof();
-}
-
 int main()
 {
+    
     int i;
-    std::cout << "Enter number is greten two! ";
-    while (true)
-    {
-        std::string input;
-        std::cin >> input;
-        if (isNumber(input))
-        {
-            i = std::stoi(input);
+    std::cout << "Enter number greater than 1: " << std::flush;
+    while (true) {
+        if (std::cin >> i) {
+            char c;
+            if (std::cin.get(c) && c != '\n') {
+                std::cout << "Extra characters after the number are not allowed!\n";
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Enter number: " << std::flush;
+                continue;
+            }
             if (i > 1) {
                 break;
+            } else {
+                std::cout << "The number must be greater than 1!\n";
+                std::cout << "Enter number: " << std::flush;
+                continue;
             }
-        } 
-        else
-        {
-            std::cout << "Invalid input: ";
+        } else {
+            if (std::cin.eof()) {
+                std::cout << "Input ended (EOF). Exiting program.!\n";
+                return 1;
+            }
+            std::cout << "Please enter only a number!\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Enter number: " << std::flush;
         }
     }
-
-    if (isPrime(i))
-    {
+    if (isPrime(i)) {
         std::cout << "Number (" << i << ") is prime:\n";
-    }
-    else {
+    } else {
         std::cout << "Number (" << i << ") is not prime:\n";
     }
     return 0;
