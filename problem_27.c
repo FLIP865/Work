@@ -33,7 +33,7 @@ int main()
 
     printf("Best odds: a = %d, b = %d\n", best_a, best_b);
     printf("The maximum length of a sequence of prime numbers: %d\n", max_length);
-    printf("Work a * b = %lld\n", best_product);
+    printf("Work %d * %d = %lld\n", best_a, best_b, best_product);
 
     return 0;
 }
